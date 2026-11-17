@@ -1,0 +1,378 @@
+/* Variables globales de color y tipografia para mantener consistencia B&N */
+:root {
+  --bg: #ffffff;
+  --fg: #0d0d0d;
+  --gray-light: #ebebeb;
+  --gray-mid: #888888;
+  --gray-dark: #2a2a2a;
+  --danger: #d92626;
+  --pixel-font: 'Press Start 2P', monospace;
+}
+
+/* Reset estricto: fuerza bordes rectos (0px) en todos los elementos para estetica voxel */
+* {
+  box-sizing: border-box;
+  user-select: none;
+  border-radius: 0 !important;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--pixel-font);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Cuadricula de fondo generada por CSS puro sin imagenes externas */
+  background-image: 
+    linear-gradient(to right, #f4f4f4 1px, transparent 1px),
+    linear-gradient(to bottom, #f4f4f4 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Marco principal con sombra solida desplazada */
+.game-frame {
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg);
+  border: 4px solid var(--fg);
+  box-shadow: 8px 8px 0px var(--fg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Distribucion en 3 columnas para el HUD superior */
+.hud {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 4px solid var(--fg);
+  padding-bottom: 12px;
+}
+
+.player-box {
+  border: 3px solid var(--gray-mid);
+  padding: 8px;
+  background: var(--bg);
+  /* Transicion escalonada (steps) para simular movimiento de cuadros por segundo retro */
+  transition: transform 0.1s steps(2);
+}
+
+/* Inversion de alto contraste para indicar el jugador activo */
+.player-box.active {
+  border: 3px solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: 4px 4px 0px var(--gray-mid);
+  transform: translate(-2px, -2px);
+}
+
+.player-box.p2 {
+  text-align: right;
+}
+
+.player-label {
+  font-size: 10px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.hearts {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.heart-svg {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.round-center {
+  text-align: center;
+  padding: 0 6px;
+}
+
+.round-badge {
+  font-size: 9px;
+  background: var(--gray-light);
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  padding: 4px 6px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.timer-text {
+  font-size: 18px;
+  display: block;
+}
+
+.timer-text.urgent {
+  color: var(--danger);
+  animation: blink 0.4s steps(2) infinite;
+}
+
+/* Contenedor de la barra de progreso de tiempo */
+.xp-bar-container {
+  width: 100%;
+  height: 14px;
+  border: 3px solid var(--fg);
+  background: var(--gray-light);
+  padding: 1px;
+  position: relative;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--fg);
+  transition: width 0.1s linear;
+}
+
+.xp-bar-fill.urgent {
+  background: var(--danger);
+}
+
+/* Divisiones verticales superpuestas para segmentar la barra en bloques */
+.xp-segments {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent 18px,
+    var(--bg) 18px,
+    var(--bg) 20px
+  );
+  pointer-events: none;
+}
+
+/* Lista desplazable del historial de palabras */
+.history-wrapper {
+  border: 3px solid var(--fg);
+  background: var(--gray-light);
+  padding: 10px;
+  height: 210px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.history-header {
+  font-size: 8px;
+  color: var(--gray-dark);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px dashed var(--gray-mid);
+  padding-bottom: 4px;
+  margin-bottom: 2px;
+}
+
+.history-item {
+  background: var(--bg);
+  border: 2px solid var(--fg);
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  animation: popIn 0.15s steps(3);
+}
+
+/* Resaltado preventivo cuando el usuario escribe una palabra ya existente */
+.history-item.duplicate-warning {
+  border-color: var(--danger);
+  background: #ffeaea;
+  color: var(--danger);
+}
+
+.history-meta {
+  font-size: 8px;
+  color: var(--gray-mid);
+}
+
+/* Resaltado invertido para la unica letra que cambio en ese turno */
+.changed-char {
+  background: var(--fg);
+  color: var(--bg);
+  padding: 1px 2px;
+}
+
+.turn-banner {
+  text-align: center;
+  font-size: 10px;
+  padding: 6px;
+  background: var(--fg);
+  color: var(--bg);
+  letter-spacing: 1px;
+}
+
+/* Casillas de entrada de las 4 letras */
+.slots-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.slot {
+  width: 56px;
+  height: 60px;
+  border: 4px solid var(--fg);
+  background: var(--bg);
+  box-shadow: inset -4px -4px 0px var(--gray-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  transition: transform 0.06s steps(2);
+}
+
+.slot.filled {
+  background: var(--gray-light);
+  transform: translateY(-2px);
+}
+
+.slot.active-cursor {
+  border-bottom: 8px solid var(--fg);
+}
+
+.feedback-msg {
+  min-height: 16px;
+  text-align: center;
+  font-size: 9px;
+  color: var(--danger);
+}
+
+/* Teclado virtual con efecto de boton fisico presionable */
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.kb-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.key-btn {
+  font-family: var(--pixel-font);
+  font-size: 11px;
+  background: var(--bg);
+  color: var(--fg);
+  border: 3px solid var(--fg);
+  box-shadow: 3px 3px 0px var(--fg);
+  padding: 10px 0;
+  flex: 1;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Al presionar la tecla, se desplaza exactamente la distancia de su sombra */
+.key-btn:active, .key-btn.pressed {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px var(--fg);
+  background: var(--gray-light);
+}
+
+.key-btn.action-key {
+  flex: 1.6;
+  font-size: 9px;
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.key-btn.action-key:active {
+  background: var(--gray-dark);
+}
+
+/* Modal de fin de partida */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 13, 13, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  z-index: 10;
+}
+
+.overlay.visible {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg);
+  border: 4px solid var(--fg);
+  box-shadow: 8px 8px 0px #000000;
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal h2 {
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.modal p {
+  font-size: 10px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--gray-dark);
+}
+
+.btn-primary {
+  font-family: var(--pixel-font);
+  font-size: 12px;
+  background: var(--fg);
+  color: var(--bg);
+  border: 4px solid var(--fg);
+  box-shadow: 4px 4px 0px var(--gray-mid);
+  padding: 14px;
+  cursor: pointer;
+}
+
+.btn-primary:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* Fotogramas clave para animaciones de impacto y aparicion */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake 0.3s steps(2);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.92); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes blink {
+  50% { opacity: 0.3; }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4-LETTER DUEL // LOCAL PVP</title>
+  <!-- Carga de tipografia pixelada desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Contenedor principal con marco tipo bloque -->
+  <main class="game-frame" id="gameFrame">
+    
+    <!-- Barra superior (HUD): Muestra vidas de ambos jugadores, ronda y reloj -->
+    <header class="hud">
+      <div class="player-box active" id="p1Box">
+        <span class="player-label">PLAYER 1</span>
+        <div class="hearts" id="p1Hearts" aria-label="Player 1 lives"></div>
+      </div>
+
+      <div class="round-center">
+        <span class="round-badge" id="roundLabel">ROUND 1</span>
+        <span class="timer-text" id="timerLabel">15s</span>
+      </div>
+
+      <div class="player-box p2" id="p2Box">
+        <span class="player-label">PLAYER 2</span>
+        <div class="hearts" id="p2Hearts" aria-label="Player 2 lives"></div>
+      </div>
+    </header>
+
+    <!-- Barra de tiempo visual segmentada estilo barra de experiencia -->
+    <div class="xp-bar-container" role="progressbar" aria-label="Turn timer">
+      <div class="xp-bar-fill" id="xpFill"></div>
+      <div class="xp-segments"></div>
+    </div>
+
+    <!-- Panel de historial cronologico: Evita repeticiones y muestra la letra cambiada -->
+    <section class="history-wrapper" id="historyList">
+      <div class="history-header">
+        <span>WORD CHAIN (NO REPEATS)</span>
+        <span id="wordCount">1 WORD</span>
+      </div>
+    </section>
+
+    <!-- Indicador textual del jugador que tiene el turno activo -->
+    <div class="turn-banner" id="turnBanner">PLAYER 1'S TURN</div>
+
+    <!-- Cuatro casillas individuales para visualizar la palabra que se esta escribiendo -->
+    <section class="slots-container" id="slotsContainer">
+      <div class="slot active-cursor" id="slot0"></div>
+      <div class="slot" id="slot1"></div>
+      <div class="slot" id="slot2"></div>
+      <div class="slot" id="slot3"></div>
+    </section>
+
+    <!-- Mensaje de retroalimentacion para errores y perdida de vidas -->
+    <div class="feedback-msg" id="feedbackMsg" role="alert"></div>
+
+    <!-- Contenedor donde JS generara el teclado virtual QWERTY -->
+    <section class="keyboard" id="keyboard"></section>
+  </main>
+
+  <!-- Ventana modal superpuesta para el resumen de fin de partida -->
+  <div class="overlay" id="gameOverOverlay">
+    <div class="modal">
+      <h2 id="winnerTitle">PLAYER 1 WINS!</h2>
+      <p id="gameOverReason">Reason text</p>
+      <p id="gameStats">Stats text</p>
+      <button class="btn-primary" id="restartBtn">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- Carga de modulos JavaScript usando type="module" para mantener el ambito aislado -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

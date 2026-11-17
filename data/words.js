@@ -1,0 +1,67 @@
+/**
+ * Diccionario local de palabras comunes de 4 letras en ingles.
+ * Se exporta como un objeto Set para que la busqueda de validez tenga
+ * complejidad O(1) (instantanea) sin importar cuantas palabras se agreguen.
+ */
+
+
+export const DICTIONARY = new Set([
+  "ABLE","ACID","AGED","ALSO","AREA","ARMY","AWAY","BABY","BACK","BALL","BAND","BANK","BASE","BATH","BEAR","BEAT",
+  "BEEN","BEER","BELL","BELT","BEST","BILL","BIRD","BLOW","BLUE","BOAT","BODY","BOMB","BOND","BONE","BOOK","BOOM",
+  "BORN","BOSS","BOTH","BOWL","BULK","BURN","BUSH","BUSY","CAKE","CALL","CALM","CAME","CAMP","CARD","CARE","CASE",
+  "CASH","CAST","CELL","CHAT","CHIP","CITY","CLUB","COAL","COAT","CODE","COLD","COME","COOK","COOL","COPE","COPY",
+  "CORE","COST","CREW","CROP","DARK","DATA","DATE","DAWN","DAYS","DEAD","DEAL","DEAR","DEBT","DEEP","DENY",
+  "DESK","DIAL","DIET","DISC","DISK","DOES","DONE","DOOR","DOSE","DOWN","DRAW","DREW","DROP","DRUG","DUAL",
+  "DUST","DUTY","EACH","EARN","EASE","EAST","EASY","EDGE","ELSE","EVEN","EVER","EVIL","EXIT","FACE","FACT",
+  "FAIL","FAIR","FALL","FARM","FAST","FATE","FEAR","FEED","FEEL","FEET","FELL","FELT","FILE","FILL","FILM","FIND",
+  "FINE","FIRE","FIRM","FISH","FIVE","FLAT","FLOW","FOOD","FOOT","FORM","FORT","FOUR","FREE","FROM","FUEL",
+  "FULL","FUND","GAIN","GAME","GATE","GAVE","GEAR","GENE","GIFT","GIRL","GIVE","GLAD","GOAL","GOES","GOLD","GOLF",
+  "GONE","GOOD","GRAY","GREW","GREY","GROW","GULF","HAIR","HALF","HALL","HAND","HANG","HARD","HARM","HATE","HAVE",
+  "HEAD","HEAR","HEAT","HELD","HELP","HERE","HERO","HIGH","HILL","HIRE","HOLD","HOLE","HOLY","HOME","HOPE",
+  "HOST","HOUR","HUGE","HUNG","HUNT","HURT","IDEA","INCH","INTO","IRON","ITEM","JOIN",
+  "JUMP","JURY","JUST","KEEN","KEEP","KEPT","KICK","KILL","KIND","KING","KNEE","KNEW","KNOW","LACK","LADY",
+  "LAID","LAKE","LAND","LANE","LAST","LATE","LEAD","LEFT","LESS","LIFE","LIFT","LIKE","LINE","LINK","LIST","LIVE",
+  "LOAD","LOAN","LOCK","LOGO","LONG","LOOK","LORD","LOSE","LOSS","LOST","LOVE","LUCK","MADE","MAIL","MAIN","MAKE",
+  "MALE","MANY","MARK","MASS","MEAL","MEAN","MEAT","MEET","MENU","MERE","MILE","MILK","MILL","MIND",
+  "MINE","MISS","MODE","MOOD","MOON","MORE","MOST","MOVE","MUCH","MUST","NAME","NAVY","NEAR","NECK","NEED","NEWS",
+  "NEXT","NICE","NINE","NONE","NOSE","NOTE","OKAY","ONCE","ONLY","ONTO","OPEN","OVER","PACE","PACK",
+  "PAGE","PAID","PAIN","PAIR","PALM","PARK","PART","PASS","PAST","PATH","PEAK","PICK","PINK","PIPE","PLAN","PLAY",
+  "PLOT","PLUG","PLUS","POLL","POOL","POOR","PORT","POST","PULL","PURE","PUSH","RACE","RAIL","RAIN","RANK","RARE",
+  "RATE","READ","REAL","REAR","RELY","RENT","REST","RICE","RICH","RIDE","RING","RISE","RISK","ROAD","ROCK","ROLE",
+  "ROLL","ROOF","ROOM","ROOT","ROSE","RULE","RUSH","SAFE","SAID","SAKE","SALE","SALT","SAME","SAND","SAVE",
+  "SEAT","SEED","SEEK","SEEM","SEEN","SELF","SELL","SEND","SENT","SHIP","SHOP","SHOT","SHOW","SHUT","SICK",
+  "SIDE","SIGN","SITE","SIZE","SKIN","SLIP","SLOW","SNOW","SOFT","SOIL","SOLD","SOLE","SOME","SONG","SOON","SORT",
+  "SOUL","SPOT","STAR","STAY","STEP","STOP","SUCH","SUIT","SURE","TAKE","TALE","TALK","TALL","TANK","TAPE","TASK",
+  "TELL","TEND","TERM","TEST","TEXT","THAN","THAT","THEM","THEN","THEY","THIN","THIS","THUS","TILL",
+  "TIME","TINY","TOLD","TOLL","TONE","TOOK","TOOL","TOUR","TOWN","TREE","TRIP","TRUE","TUNE","TURN","TWIN",
+  "TYPE","UNIT","UPON","USED","USER","VARY","VAST","VERY","VICE","VIEW","VOTE","WAGE","WAIT","WAKE","WALK","WALL",
+  "WANT","WARD","WARM","WASH","WAVE","WAYS","WEAK","WEAR","WEEK","WELL","WENT","WERE","WEST","WHAT","WHEN","WHOM",
+  "WIDE","WIFE","WILD","WILL","WIND","WINE","WING","WIRE","WISE","WISH","WITH","WOOD","WORD","WORE","WORK","YARD",
+  "YEAH","YEAR","YOUR","ZERO","ZONE","FAKE",
+
+  // New words
+  "ACNE","ACRE","AIDE","BAKE","BARE","BARK","BARN","BEND","BITE","BRAG","BRAN",
+  "CAGE","CALF","CANE","CART","CAVE","CHEF","CLAY","CLIP","COIN","CORD","CURE","CUTE",
+  "DARE","DASH","DEER","DICE","DIME","DINE","DIVE","DOME","DRUM","ECHO","EDIT","EXAM",
+  "FADE","FAME","FANG","FERN","FIBS","FOLD","FONT","FROG","FURS","TAME",
+
+  // Four-letter plurals
+  "ARMS","AXES","BAGS","BATS","BEDS","BEES","BINS","BITS","BOYS",
+  "BUDS","BUGS","BUNS","CANS","CARS","CATS","CUPS","DOGS","DOTS",
+  "EARS","EGGS","ENDS","EYES","FEES","FIGS","GEMS","HATS","HENS",
+  "HIPS","HITS","HUGS","HUTS","JARS","JETS","JOYS","LEGS","LIPS",
+  "LIES","LOTS","MAPS","MATS","MICE","MOBS","MOMS","MUGS","NETS",
+  "NUTS","OAKS","ODDS","PADS","PALS","PANS","PENS","PETS","PIES",
+  "PIGS","PINS","PITS","POTS","RAYS","RIBS","RIMS","RODS","RUGS",
+  "SEAS","SETS","SIPS","TABS","TAGS","TAPS","TOES","TOPS","TUBS",
+  "WIGS","WITS"
+]);
+
+
+/**
+ * Conjunto curado de palabras iniciales con multiples vecinos validos
+ * para garantizar que el primer turno siempre sea fluido.
+ */
+export const STARTER_WORDS = [
+  "COLD", "GAME", "HAND", "LINE", "MAKE", "PLAY", "TIME", "WORD", "BOOK", "DARK", "LAKE"
+];
