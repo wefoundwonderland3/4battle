@@ -1,4 +1,5 @@
 import { playSound } from './audio.js';
+import { loadDictionary } from '../data/words.js';
 import {
   createInitialState,
   getMaxTimeForRound,
@@ -9,11 +10,13 @@ import {
 
 /**
  * Controlador principal de la aplicacion.
- * Conecta el motor de reglas (engine.js) con la interfaz HTML/CSS y los eventos de usuario.
+ * Conecta el motor de reglas (engine.js) con la interfaz HTML/CSS,
+ * gestiona la carga asincrona del diccionario y escucha los eventos del usuario.
  */
 
 let state = {};
 let timerInterval = null;
+let isDictionaryLoaded = false;
 
 // Genera el grafico vectorial SVG de un corazon pixelado segun su estado (lleno o vacio)
 function getHeartSVG(filled, isDarkBg) {
@@ -28,8 +31,10 @@ function getHeartSVG(filled, isDarkBg) {
   `;
 }
 
-// Inicializa o reinicia la partida completa
+// Inicializa o reinicia la partida completa una vez que el diccionario esta disponible
 function initGame() {
+  if (!isDictionaryLoaded) return;
+
   clearInterval(timerInterval);
   state = createInitialState();
 
@@ -187,7 +192,7 @@ function penalizePlayer(reason) {
 
 // Procesa el envio de una palabra completa
 function submitWord() {
-  if (state.isGameOver) return;
+  if (!isDictionaryLoaded || state.isGameOver) return;
   const word = state.currentInput;
 
   if (word.length < 4) {
@@ -234,7 +239,7 @@ function submitWord() {
 
 // Maneja entradas tanto del teclado virtual en pantalla como del teclado fisico
 function handleKey(key) {
-  if (state.isGameOver) return;
+  if (!isDictionaryLoaded || state.isGameOver) return;
 
   if (key === 'BACK') {
     if (state.currentInput.length > 0) {
@@ -292,6 +297,8 @@ function buildKeyboard() {
 
 // Escucha pulsaciones del teclado fisico y sincroniza la animacion con el teclado virtual
 document.addEventListener('keydown', (e) => {
+  if (!isDictionaryLoaded) return;
+
   if (state.isGameOver) {
     if (e.key === 'Enter') initGame();
     return;
@@ -314,6 +321,20 @@ document.addEventListener('keydown', (e) => {
 
 document.getElementById('restartBtn').addEventListener('click', initGame);
 
-// Arranque inicial
-buildKeyboard();
-initGame();
+// Secuencia de arranque asincrona: construye la UI, carga el JSON y comienza la partida
+async function bootstrap() {
+  buildKeyboard();
+  document.getElementById('turnBanner').textContent = "LOADING DICTIONARY...";
+
+  try {
+    await loadDictionary();
+    isDictionaryLoaded = true;
+    initGame();
+  } catch (error) {
+    document.getElementById('turnBanner').textContent = "LOAD FAILED";
+    document.getElementById('feedbackMsg').textContent = "CHECK DATA/WORDS4.JSON";
+    console.error(error);
+  }
+}
+
+bootstrap();
