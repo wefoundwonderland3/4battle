@@ -12,7 +12,7 @@ export const STARTER_WORDS = [
 // Palabras adicionales garantizadas manualmente
 const EXTRA_WORDS = [
   "BANE", "FEST", "STAN", "SANE", "SANK", "TORE", "DIME", 
-  "TAME", "BAKE", "BANE"
+  "TAME", "BAKE", "BANE", "SWAN"
 ];
 
 export async function loadDictionary() {
