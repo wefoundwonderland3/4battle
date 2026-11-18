@@ -1,6 +1,6 @@
 /**
  * Modulo encargado de cargar y almacenar el diccionario completo de 4 letras.
- * Convierte el arreglo JSON en un Set para mantener validaciones instantaneas O(1).
+ * Combina el archivo JSON lexico con una lista manual de respaldo.
  */
 export const DICTIONARY = new Set();
 
@@ -9,10 +9,11 @@ export const STARTER_WORDS = [
   "FIRE", "WIND", "STAR", "MIND", "LAND", "FAST", "GOLD", "SHIP", "TREE", "BLUE"
 ];
 
-/**
- * Descarga el archivo JSON local una sola vez al abrir la pagina
- * y puebla el Set en memoria.
- */
+// Palabras adicionales garantizadas manualmente
+const EXTRA_WORDS = [
+  "BANE", "FEST", "STAN"
+];
+
 export async function loadDictionary() {
   if (DICTIONARY.size > 0) return;
 
@@ -24,5 +25,9 @@ export async function loadDictionary() {
   const wordsArray = await response.json();
   for (const word of wordsArray) {
     DICTIONARY.add(word);
+  }
+
+  for (const extra of EXTRA_WORDS) {
+    DICTIONARY.add(extra);
   }
 }
