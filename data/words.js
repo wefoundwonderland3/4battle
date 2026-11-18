@@ -6,7 +6,7 @@ export const DICTIONARY = new Set();
 
 export const STARTER_WORDS = [
   "COLD", "GAME", "HAND", "LINE", "MAKE", "TIME", "WORD", "BOOK", "DARK",
-  "FIRE", "WIND", "STAR", "MIND", "LAND", "FAST", "GOLD", "SHIP", "TREE", "BLUE"
+  "FIRE", "WIND", "MIND", "LAND", "FAST", "GOLD", "SHIP", "TREE", "BLUE"
 ];
 
 // Palabras adicionales garantizadas manualmente
